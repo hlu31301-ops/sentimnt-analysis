@@ -1,11 +1,10 @@
 /**
  * ==============================================================================
- * MoodLens (AI 감성, 마음건강 & 토끼 버니의 힐링 케어) - 프론트엔드 비즈니스 로직
+ * MoodLens (AI 감성 분석 & 토끼 버니의 힐링 케어) - 프론트엔드 비즈니스 로직
  * 파일명: public/app.js
  * 기술 스택: Vanilla JavaScript (순수 자바스크립트)
  * 설명: 사용자의 입력을 검증하고, 백엔드 API(/api/analyze)를 호출하여
- *       감성, 스트레스, 우울감, 칼로리 분석 및 AI 힐링 처방전을 시각화하고,
- *       사랑스러운 토끼 마스코트 '버니'와 인터랙티브하게 상호작용합니다.
+ *       세련된 3단 웰니스 리포트 대시보드를 렌더링하고 토끼 버니와 상호작용합니다.
  * ==============================================================================
  */
 
@@ -29,35 +28,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const resultCard = document.getElementById('result-card');         // 결과 카드 컨테이너
   
-  // 1) 감성 결과 요소
-  const sentimentBadge = document.getElementById('sentiment-badge');
-  const badgeIcon = document.getElementById('badge-icon');
-  const badgeText = document.getElementById('badge-text');
+  // [영역 1] 메인 감정 하이라이트 배너 요소
+  const resultHeroBanner = document.getElementById('result-hero-banner');
+  const heroEmoji = document.getElementById('hero-emoji');
+  const emotionLabel = document.getElementById('emotion-label');
   const confidenceText = document.getElementById('confidence-text');
-  const progressFill = document.getElementById('progress-fill');
 
-  // 2) 스트레스 결과 요소
-  const stressBadge = document.getElementById('stress-badge');
+  // [영역 2] 3대 웰니스 핵심 지표 카드 요소
+  // 스트레스
   const stressLevelText = document.getElementById('stress-level-text');
+  const stressBadge = document.getElementById('stress-badge');
   const stressFill = document.getElementById('stress-fill');
   const stressMessage = document.getElementById('stress-message');
 
-  // 3) 우울감 결과 요소
-  const depressionBadge = document.getElementById('depression-badge');
+  // 우울감
   const depressionLevelText = document.getElementById('depression-level-text');
+  const depressionBadge = document.getElementById('depression-badge');
   const depressionFill = document.getElementById('depression-fill');
   const depressionMessage = document.getElementById('depression-message');
 
-  // 4) 식단 및 칼로리 결과 요소
+  // 식단 칼로리
+  const caloriesNumber = document.getElementById('calories-number');
   const caloriesBadge = document.getElementById('calories-badge');
   const foodDetectedText = document.getElementById('food-detected-text');
   const nutritionTipText = document.getElementById('nutrition-tip-text');
 
-  // 5) AI 오늘의 힐링 처방전 체크리스트 요소
-  const healingChecklist = document.getElementById('healing-checklist');
-
-  // 6) 종합 분석 이유
+  // [영역 3] 상세 리포트 요소
   const reasonText = document.getElementById('reason-text');
+  const healingChecklist = document.getElementById('healing-checklist');
 
   // --------------------------------------------------------------------------
   // 2. 글자 수 카운터 및 헬퍼 함수
@@ -162,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --------------------------------------------------------------------------
-  // 6. 종합 분석 결과 렌더링 함수
+  // 6. 종합 웰니스 리포트 렌더링 함수
   // --------------------------------------------------------------------------
   function renderResult(resultData) {
     const { 
@@ -192,119 +190,121 @@ document.addEventListener('DOMContentLoaded', () => {
     bunnyAvatar.classList.add('bunny-jump');
 
     // ------------------------------------------------------------------------
-    // 6.2 감정 상태 뱃지 & 확신도 바
+    // 6.2 [영역 1] 메인 감정 하이라이트 배너 렌더링
     // ------------------------------------------------------------------------
-    sentimentBadge.className = 'sentiment-badge';
-    progressFill.className = 'progress-fill';
-
+    resultHeroBanner.className = 'result-hero-banner';
     const normalizedSentiment = String(sentiment).toLowerCase();
+
     if (normalizedSentiment.includes('긍정') || normalizedSentiment.includes('positive')) {
-      sentimentBadge.classList.add('badge-positive');
-      progressFill.classList.add('fill-positive');
-      badgeIcon.textContent = '🌿';
-      badgeText.textContent = '긍정 (Positive)';
+      resultHeroBanner.classList.add('banner-positive');
+      heroEmoji.textContent = '🌿';
+      emotionLabel.textContent = '밝고 긍정적인 하루 ✨';
     } else if (normalizedSentiment.includes('부정') || normalizedSentiment.includes('negative')) {
-      sentimentBadge.classList.add('badge-negative');
-      progressFill.classList.add('fill-negative');
-      badgeIcon.textContent = '🌧️';
-      badgeText.textContent = '부정 (Negative)';
+      resultHeroBanner.classList.add('banner-negative');
+      heroEmoji.textContent = '🌧️';
+      emotionLabel.textContent = '위로가 필요한 하루 🤍';
     } else {
-      sentimentBadge.classList.add('badge-neutral');
-      progressFill.classList.add('fill-neutral');
-      badgeIcon.textContent = '☁️';
-      badgeText.textContent = '중립 (Neutral)';
+      resultHeroBanner.classList.add('banner-neutral');
+      heroEmoji.textContent = '☁️';
+      emotionLabel.textContent = '차분하고 담담한 하루 🍃';
     }
 
     const safeConfidence = Math.min(100, Math.max(0, Number(confidence) || 0));
     confidenceText.textContent = `${safeConfidence}%`;
-    progressFill.style.width = '0%';
-    setTimeout(() => {
-      progressFill.style.width = `${safeConfidence}%`;
-    }, 50);
 
     // ------------------------------------------------------------------------
-    // 6.3 스트레스 지수 게이지
+    // 6.3 [영역 2] 3대 웰니스 핵심 지표 카드 렌더링
     // ------------------------------------------------------------------------
+    
+    // (1) 스트레스 지수
     const safeStress = Math.min(100, Math.max(0, Number(stress_level) || 0));
-    stressLevelText.textContent = `${safeStress}점`;
+    stressLevelText.textContent = safeStress;
 
-    stressBadge.className = 'meter-badge';
-    stressFill.className = 'mini-fill';
+    stressBadge.className = 'stat-status-pill';
+    stressFill.className = 'stat-bar-fill';
 
     if (safeStress <= 20) {
-      stressBadge.classList.add('stress-peace');
+      stressBadge.classList.add('status-peace');
       stressFill.classList.add('fill-peace');
       stressBadge.textContent = '🌱 평온';
     } else if (safeStress <= 40) {
-      stressBadge.classList.add('stress-low');
+      stressBadge.classList.add('status-low');
       stressFill.classList.add('fill-low');
       stressBadge.textContent = '💧 안정';
     } else if (safeStress <= 60) {
-      stressBadge.classList.add('stress-medium');
+      stressBadge.classList.add('status-medium');
       stressFill.classList.add('fill-medium');
       stressBadge.textContent = '⚡ 보통';
     } else if (safeStress <= 80) {
-      stressBadge.classList.add('stress-high');
+      stressBadge.classList.add('status-high');
       stressFill.classList.add('fill-high');
-      stressBadge.textContent = '⚠️ 주의 (피로)';
+      stressBadge.textContent = '⚠️ 피로/주의';
     } else {
-      stressBadge.classList.add('stress-extreme');
+      stressBadge.classList.add('status-extreme');
       stressFill.classList.add('fill-extreme');
-      stressBadge.textContent = '🚨 경고 (과부하)';
+      stressBadge.textContent = '🚨 과부하';
     }
 
     stressFill.style.width = '0%';
     setTimeout(() => {
       stressFill.style.width = `${safeStress}%`;
-    }, 80);
+    }, 60);
 
     stressMessage.textContent = stress_message || '편안한 마음으로 충분한 휴식을 취해보세요.';
 
-    // ------------------------------------------------------------------------
-    // 6.4 우울감 지수 게이지 & 맞춤 위로
-    // ------------------------------------------------------------------------
+    // (2) 우울감 지수
     const safeDepression = Math.min(100, Math.max(0, Number(depression_level) || 0));
-    depressionLevelText.textContent = `${safeDepression}점`;
+    depressionLevelText.textContent = safeDepression;
 
-    depressionBadge.className = 'meter-badge';
+    depressionBadge.className = 'stat-status-pill';
+    depressionFill.className = 'stat-bar-fill';
 
     if (safeDepression <= 20) {
-      depressionBadge.classList.add('depression-clear');
+      depressionBadge.classList.add('status-clear');
+      depressionFill.classList.add('fill-clear');
       depressionBadge.textContent = '☀️ 맑음';
     } else if (safeDepression <= 50) {
-      depressionBadge.classList.add('depression-mild');
+      depressionBadge.classList.add('status-mild');
+      depressionFill.classList.add('fill-mild');
       depressionBadge.textContent = '⛅ 가벼운 울적함';
     } else if (safeDepression <= 75) {
-      depressionBadge.classList.add('depression-caution');
+      depressionBadge.classList.add('status-caution');
+      depressionFill.classList.add('fill-caution');
       depressionBadge.textContent = '🌧️ 주의 필요';
     } else {
-      depressionBadge.classList.add('depression-deep');
-      depressionBadge.textContent = '⛈️ 심층 케어 권장';
+      depressionBadge.classList.add('status-deep');
+      depressionFill.classList.add('fill-deep');
+      depressionBadge.textContent = '⛈️ 심층 케어';
     }
 
     depressionFill.style.width = '0%';
     setTimeout(() => {
       depressionFill.style.width = `${safeDepression}%`;
-    }, 120);
+    }, 100);
 
     depressionMessage.textContent = depression_message || '소중한 당신의 오늘 하루를 진심으로 안아드립니다.';
 
-    // ------------------------------------------------------------------------
-    // 6.5 식단 & 섭취 칼로리 분석
-    // ------------------------------------------------------------------------
+    // (3) 식단 & 섭취 칼로리
     const safeCalories = Math.max(0, Number(calories_estimated) || 0);
+    caloriesNumber.textContent = safeCalories > 0 ? safeCalories.toLocaleString() : '0';
+
     if (safeCalories > 0) {
-      caloriesBadge.textContent = `🔥 약 ${safeCalories.toLocaleString()} kcal`;
+      caloriesBadge.textContent = '🔥 식단 감지';
+      caloriesBadge.className = 'stat-status-pill status-food';
     } else {
-      caloriesBadge.textContent = `🍽️ 칼로리 정보 없음`;
+      caloriesBadge.textContent = '식단 미언급';
+      caloriesBadge.className = 'stat-status-pill status-deep';
     }
 
     foodDetectedText.textContent = food_detected || '언급된 음식 없음';
     nutritionTipText.textContent = nutrition_tip || '건강하고 맛있는 식사로 활력을 채워보세요!';
 
     // ------------------------------------------------------------------------
-    // 6.6 AI 오늘의 힐링 처방전 (실천 체크리스트 동적 생성)
+    // 6.4 [영역 3] 상세 리포트 (분석 이유 & 힐링 처방전)
     // ------------------------------------------------------------------------
+    reasonText.textContent = reason || '입력된 문맥을 바탕으로 종합 웰니스 분석을 완료했습니다.';
+
+    // 힐링 체크리스트 동적 렌더링
     healingChecklist.innerHTML = '';
     const actions = Array.isArray(healing_actions) && healing_actions.length > 0
       ? healing_actions
@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const toggleComplete = () => {
         if (checkbox.checked) {
           li.classList.add('completed');
-          bunnyBubbleText.textContent = "와! 힐링 액션을 실천하셨네요! 최고예요 토끼가 칭찬해요 🐰🎉";
+          bunnyBubbleText.textContent = "와! 힐링 처방전을 실천하셨네요! 최고예요 토끼가 칭찬해요 🐰🎉";
           bunnyAvatar.classList.remove('bunny-jump');
           void bunnyAvatar.offsetWidth;
           bunnyAvatar.classList.add('bunny-jump');
@@ -347,12 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
       healingChecklist.appendChild(li);
     });
 
-    // ------------------------------------------------------------------------
-    // 6.7 종합 분석 이유 텍스트
-    // ------------------------------------------------------------------------
-    reasonText.textContent = reason || '입력된 문맥을 바탕으로 종합 웰니스 분석을 완료했습니다.';
-
-    // 결과 카드 노출 및 부드러운 스크롤
+    // 결과 카드 노출 및 부드러운 스크롤 이동
     resultCard.classList.remove('hidden');
     resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
@@ -382,7 +377,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function hideResult() {
     resultCard.classList.add('hidden');
-    progressFill.style.width = '0%';
     stressFill.style.width = '0%';
     depressionFill.style.width = '0%';
   }

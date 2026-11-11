@@ -1,7 +1,7 @@
 /* ==========================================================================
-   MoodLens (감성, 마음건강 & 토끼 버니의 힐링 케어) - 프리미엄 스타일시트
-   - 몽환적인 파스텔 오로라 & 글래스모피즘(Glassmorphism) 디자인 시스템
-   - 인터랙티브 토끼 마스코트 '버니'와 감성 웰니스 대시보드
+   MoodLens (AI 감성 분석 & 토끼 버니의 힐링 케어) - 프리미엄 스타일시트
+   - 몽환적인 파스텔 오로라 & 글래스모피즘(Glassmorphism)
+   - 정갈하고 세련된 3단 웰니스 리포트 대시보드 레이아웃
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -10,14 +10,13 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
 /* --------------------------------------------------------------------------
-   2. 감성 디자인 토큰 (CSS 변수)
+   2. 디자인 토큰 (CSS 변수)
    -------------------------------------------------------------------------- */
 :root {
   /* 배경 & 글래스 색상 */
   --bg-canvas: #F8FAFD;
-  --glass-card: rgba(255, 255, 255, 0.88);
+  --glass-card: rgba(255, 255, 255, 0.9);
   --glass-border: rgba(255, 255, 255, 0.95);
-  --glass-widget: rgba(255, 255, 255, 0.75);
 
   /* 파스텔 브랜드 포인트 */
   --color-brand-blue: #4A90E2;
@@ -29,20 +28,19 @@
   --grad-primary: linear-gradient(135deg, #4A90E2 0%, #6366F1 100%);
   --grad-primary-hover: linear-gradient(135deg, #3B82F6 0%, #4F46E5 100%);
   --grad-accent: linear-gradient(135deg, #FF6B8B 0%, #FFA07A 100%);
-  --grad-aurora: linear-gradient(135deg, #E0F2FE 0%, #EDE9FE 50%, #FCE7F3 100%);
 
   /* 감정 상태별 색상 */
   --color-positive: #059669;
-  --bg-positive: #ECFDF5;
+  --bg-positive-banner: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
   --border-positive: #A7F3D0;
 
-  --color-negative: #DC2626;
-  --bg-negative: #FEF2F2;
-  --border-negative: #FECACA;
+  --color-negative: #E11D48;
+  --bg-negative-banner: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%);
+  --border-negative: #FECDD3;
 
   --color-neutral: #475569;
-  --bg-neutral: #F1F5F9;
-  --border-neutral: #CBD5E1;
+  --bg-neutral-banner: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+  --border-neutral: #E2E8F0;
 
   /* 텍스트 색상 */
   --text-title: #0F172A;
@@ -56,10 +54,10 @@
   --radius-pill: 9999px;
 
   /* 프리미엄 그림자 */
-  --shadow-glass: 0 20px 40px -15px rgba(74, 144, 226, 0.12), 0 2px 8px rgba(0, 0, 0, 0.02);
+  --shadow-glass: 0 20px 45px -15px rgba(74, 144, 226, 0.12), 0 2px 8px rgba(0, 0, 0, 0.02);
   --shadow-hover: 0 24px 48px -12px rgba(74, 144, 226, 0.22);
-  --shadow-card: 0 10px 25px -5px rgba(15, 23, 42, 0.04);
-  --shadow-btn: 0 8px 20px rgba(99, 102, 241, 0.3);
+  --shadow-card: 0 8px 20px -4px rgba(15, 23, 42, 0.04);
+  --shadow-btn: 0 8px 22px rgba(99, 102, 241, 0.32);
 
   /* 전환 효과 */
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -87,12 +85,11 @@ html, body {
   overflow-x: hidden;
 }
 
-/* 몽환적인 오로라 배경 블롭 */
 .aurora-blob {
   position: fixed;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.6;
+  opacity: 0.55;
   z-index: 0;
   pointer-events: none;
   animation: blobFloat 18s ease-in-out infinite alternate;
@@ -150,11 +147,11 @@ html, body {
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(12px);
-  padding: 8px 18px;
+  padding: 8px 20px;
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.95);
   box-shadow: 0 4px 15px rgba(74, 144, 226, 0.08);
   transition: transform var(--ease-spring) 0.3s;
 }
@@ -269,7 +266,7 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   5.1 콘텐츠 래퍼 (토끼 + 입력창 가로 배치)
+   5.1 콘텐츠 래퍼 (토끼 + 입력창)
    -------------------------------------------------------------------------- */
 .content-wrapper {
   width: 100%;
@@ -279,9 +276,7 @@ html, body {
   gap: 32px;
 }
 
-/* --------------------------------------------------------------------------
-   5.2 [신규] 프리미엄 토끼 마스코트 '버니'
-   -------------------------------------------------------------------------- */
+/* 토끼 마스코트 '버니' */
 .bunny-companion {
   width: 220px;
   flex-shrink: 0;
@@ -293,7 +288,6 @@ html, body {
   animation: fadeIn 0.6s ease;
 }
 
-/* 둥글둥글 젤리 감성 말풍선 */
 .bunny-bubble {
   position: relative;
   background: #FFFFFF;
@@ -328,7 +322,6 @@ html, body {
   border-color: #FFFFFF transparent transparent transparent;
 }
 
-/* 토끼 캐릭터 본체 */
 .bunny-character {
   width: 140px;
   cursor: pointer;
@@ -352,7 +345,6 @@ html, body {
   height: auto;
 }
 
-/* 토끼 귀 애니메이션 */
 .bunny-ear.ear-left {
   transform-origin: 48px 65px;
   animation: earWiggleLeft 4s ease-in-out infinite;
@@ -362,7 +354,6 @@ html, body {
   animation: earWiggleRight 4s ease-in-out infinite 0.4s;
 }
 
-/* 토끼 눈 깜빡임 */
 .bunny-eye {
   transform-origin: center;
   animation: bunnyBlink 3.8s infinite;
@@ -427,7 +418,6 @@ html, body {
   box-shadow: 0 0 8px #6366F1;
 }
 
-/* 캔디 파스텔 샘플 칩 */
 .sample-chips-container {
   display: flex;
   align-items: center;
@@ -453,26 +443,10 @@ html, body {
   white-space: nowrap;
 }
 
-.chip-happy {
-  background: #ECFDF5;
-  color: #059669;
-  border-color: #A7F3D0;
-}
-.chip-sad {
-  background: #FFF1F2;
-  color: #E11D48;
-  border-color: #FECDD3;
-}
-.chip-gloomy {
-  background: #F5F3FF;
-  color: #7C3AED;
-  border-color: #DDD6FE;
-}
-.chip-calm {
-  background: #F0F9FF;
-  color: #0284C7;
-  border-color: #BAE6FD;
-}
+.chip-happy { background: #ECFDF5; color: #059669; border-color: #A7F3D0; }
+.chip-sad { background: #FFF1F2; color: #E11D48; border-color: #FECDD3; }
+.chip-gloomy { background: #F5F3FF; color: #7C3AED; border-color: #DDD6FE; }
+.chip-calm { background: #F0F9FF; color: #0284C7; border-color: #BAE6FD; }
 
 .btn-sample-chip:hover {
   transform: translateY(-2px) scale(1.04);
@@ -483,7 +457,6 @@ html, body {
   transform: translateY(0) scale(1);
 }
 
-/* 텍스트 입력창 */
 .textarea-wrapper {
   position: relative;
   width: 100%;
@@ -505,7 +478,6 @@ html, body {
   transition: all var(--ease-smooth) 0.25s;
   outline: none;
   line-height: 1.7;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .analysis-textarea::placeholder {
@@ -515,10 +487,9 @@ html, body {
 
 .analysis-textarea:focus {
   border-color: #6366F1;
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
 }
 
-/* 카드 푸터 */
 .card-footer {
   margin-top: 18px;
   display: flex;
@@ -539,7 +510,6 @@ html, body {
   font-weight: 800;
 }
 
-/* 블링블링 분석 버튼 */
 .btn-analyze {
   position: relative;
   overflow: hidden;
@@ -587,11 +557,11 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   7. 오류 알림 영역 (Error Alert Box)
+   7. 오류 알림 영역
    -------------------------------------------------------------------------- */
 .error-box {
   width: 100%;
-  max-width: 680px;
+  max-width: 820px;
   margin-top: 20px;
   padding: 16px 20px;
   border-radius: var(--radius-md);
@@ -627,19 +597,19 @@ html, body {
   height: 18px;
 }
 
-/* --------------------------------------------------------------------------
-   8. 종합 분석 결과 카드 (Glassmorphism Result Card)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   8. [전면 개편] 프리미엄 웰니스 결과 리포트 카드 (정갈한 잡지 스타일)
+   ========================================================================== */
 .result-card {
   width: 100%;
-  max-width: 680px;
-  margin-top: 32px;
+  max-width: 820px; /* 더 넓고 시원하게 확장 */
+  margin-top: 36px;
   background: var(--glass-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-glass);
-  padding: 36px;
+  padding: 38px;
   border: 1.5px solid var(--glass-border);
   animation: slideUpFade 0.5s var(--ease-spring);
 }
@@ -648,266 +618,323 @@ html, body {
   display: none;
 }
 
-/* 결과 카드 헤더 */
-.result-header {
+/* --------------------------------------------------------------------------
+   8.1 [영역 1] 메인 감정 하이라이트 배너 (Hero Result Banner)
+   -------------------------------------------------------------------------- */
+.result-hero-banner {
+  background: var(--bg-neutral-banner);
+  border: 1.5px solid var(--border-neutral);
+  border-radius: var(--radius-lg);
+  padding: 22px 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 26px;
-  padding-bottom: 20px;
-  border-bottom: 1.5px solid #F1F5F9;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  transition: all var(--ease-smooth) 0.4s;
 }
 
-.result-title-group {
+/* 감정별 배너 테마 */
+.result-hero-banner.banner-positive {
+  background: var(--bg-positive-banner);
+  border-color: var(--border-positive);
+}
+.result-hero-banner.banner-negative {
+  background: var(--bg-negative-banner);
+  border-color: var(--border-negative);
+}
+.result-hero-banner.banner-neutral {
+  background: var(--bg-neutral-banner);
+  border-color: var(--border-neutral);
+}
+
+.hero-emotion-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 18px;
 }
 
-.result-icon-badge {
-  font-size: 1.3rem;
+.hero-emoji-circle {
+  width: 58px;
+  height: 58px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
 }
 
-.result-title {
-  font-size: 1.25rem;
-  font-weight: 800;
+.hero-emoji {
+  font-size: 2rem;
+}
+
+.hero-emotion-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-sub-tag {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.hero-emotion-title {
+  font-size: 1.55rem;
+  font-weight: 900;
   color: var(--text-title);
   letter-spacing: -0.02em;
 }
 
-/* 감정 뱃지 */
-.sentiment-badge {
-  display: inline-flex;
+/* 확신도 캡슐 뱃지 */
+.hero-confidence-badge {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: 800;
-  border-radius: var(--radius-pill);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: all var(--ease-spring) 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
-.badge-positive {
-  background: var(--bg-positive);
-  color: var(--color-positive);
-  border: 1.5px solid var(--border-positive);
+.hero-confidence-badge .badge-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
 }
 
-.badge-negative {
-  background: var(--bg-negative);
-  color: var(--color-negative);
-  border: 1.5px solid var(--border-negative);
+.hero-confidence-badge .badge-value {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #6366F1;
 }
 
-.badge-neutral {
-  background: var(--bg-neutral);
-  color: var(--color-neutral);
-  border: 1.5px solid var(--border-neutral);
+/* --------------------------------------------------------------------------
+   8.2 [영역 2] 3대 웰니스 핵심 지표 카드 (3단 스탯 그리드)
+   -------------------------------------------------------------------------- */
+.wellness-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 26px;
 }
 
-/* 공통 위젯 스타일 */
-.dashboard-widget {
+.stat-card {
   background: #FFFFFF;
   border-radius: var(--radius-lg);
-  padding: 20px 22px;
+  padding: 22px 20px;
   border: 1.5px solid #F1F5F9;
   box-shadow: var(--shadow-card);
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
   transition: transform var(--ease-smooth) 0.25s, box-shadow var(--ease-smooth) 0.25s;
 }
 
-.dashboard-widget:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px -8px rgba(74, 144, 226, 0.12);
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px -8px rgba(74, 144, 226, 0.12);
 }
 
-.widget-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.widget-title-wrap {
+.stat-top {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 12px;
 }
 
-.widget-emoji {
-  font-size: 1.15rem;
+.stat-icon {
+  font-size: 1.25rem;
 }
 
-.widget-label {
+.stat-name {
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-title);
 }
 
-.widget-value {
-  font-size: 1.15rem;
+.stat-mid {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.stat-number {
+  font-size: 2.1rem;
   font-weight: 900;
+  line-height: 1;
 }
 
-.highlight-blue { color: #6366F1; }
-.highlight-stress { color: #EA580C; }
-.highlight-depression { color: #7C3AED; }
-
-.widget-desc {
-  font-size: 0.88rem;
-  color: var(--text-body);
-  line-height: 1.55;
-  word-break: keep-all;
-  margin-top: 8px;
+.stat-unit {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-muted);
 }
 
-/* 1) 신뢰도 프로그레스 바 */
-.progress-track {
-  width: 100%;
-  height: 12px;
-  background: #F1F5F9;
-  border-radius: var(--radius-pill);
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  background: var(--grad-primary);
-  border-radius: var(--radius-pill);
-  transition: width 0.9s var(--ease-spring);
-}
-
-.progress-fill.fill-positive { background: linear-gradient(90deg, #34D399 0%, #059669 100%); }
-.progress-fill.fill-negative { background: linear-gradient(90deg, #F87171 0%, #DC2626 100%); }
-.progress-fill.fill-neutral { background: linear-gradient(90deg, #94A3B8 0%, #475569 100%); }
-
-/* 2) 듀얼 미터기 그리드 (스트레스 & 우울감 나란히 배치) */
-.dual-meter-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.dual-meter-grid .dashboard-widget {
-  margin-bottom: 0;
-}
-
-.meter-badge {
-  font-size: 0.725rem;
+/* 상태 알약 뱃지 */
+.stat-status-pill {
+  margin-left: auto;
+  font-size: 0.75rem;
   font-weight: 800;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: var(--radius-pill);
 }
 
-.meter-badge.stress-peace { background: #D1FAE5; color: #065F46; }
-.meter-badge.stress-low { background: #DBEAFE; color: #1E40AF; }
-.meter-badge.stress-medium { background: #FEF3C7; color: #92400E; }
-.meter-badge.stress-high { background: #FFEDD5; color: #9A3412; }
-.meter-badge.stress-extreme { background: #FEE2E2; color: #991B1B; }
+/* 스트레스 뱃지 */
+.status-peace { background: #D1FAE5; color: #065F46; }
+.status-low { background: #DBEAFE; color: #1E40AF; }
+.status-medium { background: #FEF3C7; color: #92400E; }
+.status-high { background: #FFEDD5; color: #9A3412; }
+.status-extreme { background: #FEE2E2; color: #991B1B; }
 
-.meter-badge.depression-clear { background: #E0F2FE; color: #0369A1; }
-.meter-badge.depression-mild { background: #EDE9FE; color: #6D28D9; }
-.meter-badge.depression-caution { background: #FCE7F3; color: #9D174D; }
-.meter-badge.depression-deep { background: #F1F5F9; color: #334155; }
+/* 우울감 뱃지 */
+.status-clear { background: #E0F2FE; color: #0369A1; }
+.status-mild { background: #EDE9FE; color: #6D28D9; }
+.status-caution { background: #FCE7F3; color: #9D174D; }
+.status-deep { background: #F1F5F9; color: #334155; }
 
-.mini-track {
+/* 음식 뱃지 */
+.status-food { background: #FFF1F2; color: #E11D48; }
+
+/* 미니 게이지 바 */
+.stat-bar-track {
   width: 100%;
   height: 8px;
   background: #F1F5F9;
   border-radius: var(--radius-pill);
   overflow: hidden;
+  margin-bottom: 12px;
 }
 
-.mini-fill {
+.stat-bar-fill {
   height: 100%;
   width: 0%;
   border-radius: var(--radius-pill);
   transition: width 0.9s var(--ease-spring);
 }
 
-#stress-fill.fill-peace { background: #10B981; }
-#stress-fill.fill-low { background: #3B82F6; }
-#stress-fill.fill-medium { background: #F59E0B; }
-#stress-fill.fill-high { background: #EA580C; }
-#stress-fill.fill-extreme { background: #DC2626; }
+.fill-peace { background: #10B981; }
+.fill-low { background: #3B82F6; }
+.fill-medium { background: #F59E0B; }
+.fill-high { background: #EA580C; }
+.fill-extreme { background: #DC2626; }
 
-#depression-fill {
-  background: linear-gradient(90deg, #A78BFA 0%, #7C3AED 100%);
-}
+.fill-clear { background: #38BDF8; }
+.fill-mild { background: #818CF8; }
+.fill-caution { background: #C084FC; }
+.fill-deep { background: #64748B; }
 
-/* 4) 식단 & 칼로리 카드 */
-.calories-widget {
+/* 식별된 음식 요약 박스 */
+.food-summary-box {
   background: #FFFDF7;
-  border-color: #FED7AA;
-}
-
-.calories-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 5px 14px;
-  font-size: 0.9rem;
-  font-weight: 800;
-  color: #FFFFFF;
-  background: var(--grad-accent);
-  border-radius: var(--radius-pill);
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
-}
-
-.food-detected-pill {
-  background: #FFFFFF;
-  padding: 12px 16px;
-  border-radius: var(--radius-md);
-  border: 1px solid #FFEDD5;
-  font-size: 0.925rem;
+  border: 1px solid #FED7AA;
+  padding: 8px 12px;
+  border-radius: 8px;
   margin-bottom: 10px;
+  font-size: 0.85rem;
   display: flex;
+  gap: 6px;
   align-items: center;
-  gap: 10px;
 }
 
-.pill-title {
+.food-tag-label {
   font-weight: 800;
-  color: #EA580C;
+  color: #C2410C;
   flex-shrink: 0;
 }
 
-.pill-content {
-  color: var(--text-title);
+.food-tag-text {
   font-weight: 700;
+  color: var(--text-title);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stat-desc {
+  font-size: 0.875rem;
+  color: var(--text-body);
+  line-height: 1.5;
   word-break: keep-all;
+  margin-top: auto;
 }
 
-.nutrition-tip-text {
-  font-size: 0.9rem;
-  color: #9A3412;
-  line-height: 1.6;
-  word-break: keep-all;
+/* --------------------------------------------------------------------------
+   8.3 [영역 3] 상세 리포트 2분할 섹션 (분석 이유 & 힐링 처방전)
+   -------------------------------------------------------------------------- */
+.report-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
-/* 5) AI 오늘의 힐링 처방전 (다이어리 스티커 스타일) */
-.healing-widget {
-  background: #F0FDF4;
-  border-color: #BBF7D0;
-  padding: 24px;
-}
-
-.healing-top-row {
+.report-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  border: 1.5px solid #F1F5F9;
+  box-shadow: var(--shadow-card);
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+}
+
+.report-card-header {
+  display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   margin-bottom: 16px;
   padding-bottom: 12px;
-  border-bottom: 1.5px solid #DCFCE7;
+  border-bottom: 1.5px solid #F8FAFC;
 }
 
-.healing-sparkle { font-size: 1.25rem; }
-.healing-title { font-size: 1.05rem; font-weight: 800; color: #166534; }
-.healing-subtitle { font-size: 0.85rem; font-weight: 700; color: #15803D; }
+.card-header-icon {
+  font-size: 1.35rem;
+}
+
+.header-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-title);
+  letter-spacing: -0.01em;
+}
+
+.card-header-subtitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #16A34A;
+}
+
+/* 왼쪽: 감성 해설 본문 */
+.reason-card {
+  border-left: 4px solid #6366F1;
+}
+
+.reason-paragraph {
+  font-size: 1rem;
+  color: var(--text-body);
+  line-height: 1.8;
+  word-break: keep-all;
+  margin: auto 0;
+}
+
+/* 오른쪽: 힐링 처방전 체크리스트 */
+.healing-card {
+  background: #F0FDF4;
+  border-color: #BBF7D0;
+}
 
 .healing-checklist {
   list-style: none;
@@ -919,32 +946,31 @@ html, body {
 .healing-item {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   background: #FFFFFF;
-  padding: 14px 18px;
+  padding: 12px 16px;
   border-radius: var(--radius-md);
   border: 1.5px solid #DCFCE7;
   cursor: pointer;
   transition: all var(--ease-spring) 0.25s;
-  box-shadow: 0 2px 6px rgba(22, 101, 52, 0.04);
+  box-shadow: 0 2px 4px rgba(22, 101, 52, 0.03);
 }
 
 .healing-item:hover {
-  transform: translateX(4px);
+  transform: translateX(3px);
   border-color: #86EFAC;
-  box-shadow: 0 6px 14px rgba(22, 101, 52, 0.08);
 }
 
 .healing-checkbox {
-  width: 20px;
-  height: 20px;
+  width: 19px;
+  height: 19px;
   accent-color: #16A34A;
   cursor: pointer;
   flex-shrink: 0;
 }
 
 .healing-text {
-  font-size: 0.95rem;
+  font-size: 0.925rem;
   font-weight: 700;
   color: #1E293B;
   transition: all var(--ease-smooth) 0.2s;
@@ -954,7 +980,7 @@ html, body {
 .healing-item.completed {
   background: #F8FAF9;
   border-color: #E2E8F0;
-  opacity: 0.7;
+  opacity: 0.65;
 }
 
 .healing-item.completed .healing-text {
@@ -962,33 +988,8 @@ html, body {
   color: #94A3B8;
 }
 
-/* 6) 종합 분석 이유 박스 */
-.reason-section {
-  background: #F8FAFC;
-  border-radius: var(--radius-md);
-  padding: 22px;
-  border-left: 4px solid #6366F1;
-}
-
-.reason-label {
-  font-size: 0.925rem;
-  font-weight: 800;
-  color: var(--text-title);
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.reason-text {
-  font-size: 1rem;
-  color: var(--text-body);
-  line-height: 1.75;
-  word-break: keep-all;
-}
-
 /* --------------------------------------------------------------------------
-   9. 애니메이션 키프레임 (토끼 둥둥 떠다니기 & 깜빡임 & 점프)
+   9. 애니메이션 키프레임
    -------------------------------------------------------------------------- */
 @keyframes bunnyFloat {
   0% { transform: translateY(0); }
@@ -1034,12 +1035,12 @@ html, body {
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideUpFade {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(22px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 /* --------------------------------------------------------------------------
-   10. 반응형 미디어 쿼리 (모바일 화면)
+   10. 반응형 미디어 쿼리 (태블릿 & 모바일 화면)
    -------------------------------------------------------------------------- */
 @media (max-width: 860px) {
   .hero-title {
@@ -1063,14 +1064,18 @@ html, body {
     width: 100%;
   }
 
-  .dual-meter-grid {
+  .wellness-stats-grid {
     grid-template-columns: 1fr;
     gap: 14px;
   }
 
-  .analysis-card, .result-card {
+  .report-split-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .result-card, .analysis-card {
     padding: 24px 20px;
-    border-radius: var(--radius-lg);
   }
 
   .input-header-row {
@@ -1089,11 +1094,5 @@ html, body {
 
   .btn-analyze {
     width: 100%;
-  }
-
-  .result-header, .healing-top-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
   }
 }
