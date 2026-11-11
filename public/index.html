@@ -3,27 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MoodLens - AI 감성, 마음건강 & 토끼의 힐링 케어</title>
+  <title>MoodLens - AI 감성 분석 & 토끼 버니의 따뜻한 웰니스 케어</title>
   <!-- SEO 및 메타 정보 -->
-  <meta name="description" content="사용자가 입력한 글의 감성을 AI가 심층 분석하여 긍정/부정/중립, 스트레스, 우울감, 칼로리 분석 및 맞춤 힐링 처방전을 제공하는 통합 웰니스 웹 서비스">
+  <meta name="description" content="사용자가 입력한 글의 감성을 AI가 심층 분석하여 긍정/부정/중립, 스트레스, 우울감, 칼로리 진단 및 힐링 처방전을 제공하는 감성 웰니스 웹 서비스">
   
   <!-- CSS 스타일시트 연결 -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- 은은하고 몽환적인 파스텔 오로라 배경 블롭 장식 -->
+  <div class="aurora-blob blob-1" aria-hidden="true"></div>
+  <div class="aurora-blob blob-2" aria-hidden="true"></div>
+  <div class="aurora-blob blob-3" aria-hidden="true"></div>
+
   <!-- ======================================================================
-       1. 상단 헤더 영역 (Header)
+       1. 상단 감성 헤더 영역 (Header)
        ====================================================================== -->
   <header class="site-header">
     <a href="/" class="brand-logo" aria-label="MoodLens 홈으로 이동">
-      <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
-        <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-        <line x1="9" y1="9" x2="9.01" y2="9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-        <line x1="15" y1="9" x2="15.01" y2="9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-      <span>MoodLens</span>
+      <div class="brand-icon-wrapper">
+        <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
+          <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <circle cx="9" cy="9.5" r="1.5" fill="currentColor"/>
+          <circle cx="15" cy="9.5" r="1.5" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="brand-text-group">
+        <span class="brand-name">MoodLens</span>
+        <span class="brand-tag">마음 렌즈</span>
+      </div>
     </a>
   </header>
 
@@ -34,186 +44,249 @@
     
     <!-- 2.1 히어로 섹션 (Hero Section) -->
     <section class="hero-section" aria-labelledby="hero-title">
-      <p class="hero-subtitle">AI Mind & Wellness Care</p>
-      <h1 id="hero-title" class="hero-title">생각에 형태를,<br>감정과 일상에 색을.</h1>
+      <div class="hero-badge">
+        <span class="badge-sparkle">✨</span>
+        <span>토끼 버니와 함께하는 따뜻한 마음 일기장</span>
+      </div>
+      <h1 id="hero-title" class="hero-title">
+        생각에 <span class="gradient-text">형태</span>를,<br>
+        감정에 <span class="gradient-text-sub">따스한 색</span>을.
+      </h1>
       <p class="hero-description">
-        오늘 하루 남긴 일기와 메모 속 숨은 감정, 스트레스, 우울감, 섭취 칼로리를 읽고 귀여운 토끼 버니가 힐링 처방전을 건네드립니다.
+        오늘 하루 남긴 일기와 메모 속 숨은 감정, 스트레스, 우울감, 섭취 칼로리를 진단하고 사랑스러운 토끼 버니가 맞춤 힐링 처방전을 건네드립니다.
       </p>
     </section>
 
-    <!-- 2.2 메인 분석 영역 래퍼 (토끼 마스코트 + 분석 입력 카드) -->
+    <!-- 2.2 메인 인터랙션 래퍼 (귀여운 토끼 마스코트 + 글래스모피즘 입력 카드) -->
     <div class="content-wrapper">
       
-      <!-- [신규] 옆에서 항상 응원하는 귀여운 인터랙티브 토끼 마스코트 '버니' -->
+      <!-- 사랑스러운 토끼 마스코트 '버니' -->
       <aside class="bunny-companion" id="bunny-companion" aria-label="귀여운 토끼 친구 버니">
-        <!-- 토끼 말풍선 -->
+        <!-- 둥글둥글 감성 말풍선 -->
         <div class="bunny-bubble" id="bunny-bubble">
+          <span class="bubble-heart">💌</span>
           <span id="bunny-bubble-text">안녕! 오늘 어떤 일이 있었어? 나에게 편하게 털어놔 줘 🐰🥕</span>
         </div>
-        <!-- 귀여운 토끼 캐릭터 (SVG 일러스트) -->
-        <div class="bunny-character" id="bunny-avatar" title="토끼를 클릭해 보세요!">
-          <svg viewBox="0 0 120 130" class="bunny-svg" aria-hidden="true">
+        
+        <!-- 토끼 캐릭터 본체 -->
+        <div class="bunny-character" id="bunny-avatar" title="버니를 콕 찔러보세요!">
+          <svg viewBox="0 0 140 150" class="bunny-svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="earGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFE4EC"/>
+                <stop offset="100%" stop-color="#FFB6C1"/>
+              </linearGradient>
+              <linearGradient id="carrotGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFA07A"/>
+                <stop offset="100%" stop-color="#FF6347"/>
+              </linearGradient>
+              <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+                <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#4A90E2" flood-opacity="0.15"/>
+              </filter>
+            </defs>
+
+            <!-- 부드러운 토끼 그림자 -->
+            <ellipse cx="70" cy="138" rx="42" ry="7" fill="#CBD5E1" opacity="0.4"/>
+
             <!-- 왼쪽 귀 -->
-            <ellipse class="bunny-ear ear-left" cx="42" cy="30" rx="11" ry="28" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
-            <ellipse class="bunny-inner-ear" cx="42" cy="30" rx="6" ry="18" fill="#FFD1DC"/>
+            <g class="bunny-ear ear-left">
+              <ellipse cx="48" cy="35" rx="13" ry="32" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="2" filter="url(#softShadow)"/>
+              <ellipse cx="48" cy="36" rx="7" ry="22" fill="url(#earGrad)"/>
+            </g>
             
             <!-- 오른쪽 귀 -->
-            <ellipse class="bunny-ear ear-right" cx="78" cy="30" rx="11" ry="28" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
-            <ellipse class="bunny-inner-ear" cx="78" cy="30" rx="6" ry="18" fill="#FFD1DC"/>
-            
-            <!-- 토끼 얼굴 -->
-            <circle class="bunny-face" cx="60" cy="72" r="38" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
-            
-            <!-- 복슬복슬 볼터치 -->
-            <ellipse class="bunny-blush" cx="36" cy="80" rx="7" ry="4" fill="#FFAAA6" opacity="0.65"/>
-            <ellipse class="bunny-blush" cx="84" cy="80" rx="7" ry="4" fill="#FFAAA6" opacity="0.65"/>
-            
-            <!-- 눈 (깜빡이는 애니메이션 적용) -->
-            <circle class="bunny-eye eye-left" cx="46" cy="68" r="4.5" fill="#2D3748"/>
-            <circle class="bunny-eye-shine" cx="48" cy="66" r="1.5" fill="#FFFFFF"/>
-            <circle class="bunny-eye eye-right" cx="74" cy="68" r="4.5" fill="#2D3748"/>
-            <circle class="bunny-eye-shine" cx="76" cy="66" r="1.5" fill="#FFFFFF"/>
-            
-            <!-- 코와 귀여운 입 -->
-            <ellipse class="bunny-nose" cx="60" cy="76" rx="3.5" ry="2.5" fill="#FF85A2"/>
-            <path class="bunny-mouth" d="M54 81 Q60 86 60 81 Q60 86 66 81" fill="none" stroke="#718096" stroke-width="2" stroke-linecap="round"/>
-            
-            <!-- 작은 앞발 -->
-            <ellipse class="bunny-paw" cx="45" cy="108" rx="8" ry="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
-            <ellipse class="bunny-paw" cx="75" cy="108" rx="8" ry="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+            <g class="bunny-ear ear-right">
+              <ellipse cx="92" cy="35" rx="13" ry="32" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="2" filter="url(#softShadow)"/>
+              <ellipse cx="92" cy="36" rx="7" ry="22" fill="url(#earGrad)"/>
+            </g>
+
+            <!-- 보들보들 몽실한 몸통 -->
+            <ellipse cx="70" cy="105" rx="36" ry="28" fill="#FFFFFF" stroke="#F1F5F9" stroke-width="2"/>
+
+            <!-- 동글동글 얼굴 -->
+            <circle cx="70" cy="78" r="42" fill="#FFFFFF" stroke="#F8FAFC" stroke-width="2" filter="url(#softShadow)"/>
+
+            <!-- 사랑스러운 볼터치 -->
+            <ellipse class="bunny-blush" cx="44" cy="88" rx="8" ry="5" fill="#FF8BA7" opacity="0.55"/>
+            <ellipse class="bunny-blush" cx="96" cy="88" rx="8" ry="5" fill="#FF8BA7" opacity="0.55"/>
+
+            <!-- 반짝이는 아기 눈 -->
+            <g class="bunny-eye eye-left">
+              <circle cx="55" cy="76" r="5" fill="#1E293B"/>
+              <circle cx="57" cy="74" r="2" fill="#FFFFFF"/>
+              <circle cx="54" cy="78" r="1" fill="#FFFFFF"/>
+            </g>
+            <g class="bunny-eye eye-right">
+              <circle cx="85" cy="76" r="5" fill="#1E293B"/>
+              <circle cx="87" cy="74" r="2" fill="#FFFFFF"/>
+              <circle cx="84" cy="78" r="1" fill="#FFFFFF"/>
+            </g>
+
+            <!-- 작은 분홍 코 -->
+            <ellipse cx="70" cy="84" rx="3.5" ry="2.5" fill="#FF6B8B"/>
+
+            <!-- 미소 짓는 입 -->
+            <path class="bunny-mouth" d="M64 89 Q70 94 70 89 Q70 94 76 89" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round"/>
+
+            <!-- 품에 꼬옥 안고 있는 당근 🥕 -->
+            <g class="bunny-carrot" transform="translate(68, 102) rotate(-25)">
+              <path d="M-8 0 L8 0 L0 26 Z" fill="url(#carrotGrad)"/>
+              <!-- 당근 잎사귀 -->
+              <path d="M-4 -4 C-6 -10 0 -10 0 -4 C0 -10 6 -10 4 -4" fill="#48BB78"/>
+              <!-- 당근 주름선 -->
+              <line x1="-3" y1="8" x2="2" y2="8" stroke="#FFFFFF" stroke-width="1.2" opacity="0.6"/>
+              <line x1="-2" y1="15" x2="3" y2="15" stroke="#FFFFFF" stroke-width="1.2" opacity="0.6"/>
+            </g>
+
+            <!-- 앙증맞은 앞발 -->
+            <ellipse cx="52" cy="112" rx="9" ry="7" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+            <ellipse cx="88" cy="112" rx="9" ry="7" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
           </svg>
-          <div class="bunny-name-tag">🐰 버니 (Bunny)</div>
+          <div class="bunny-name-tag">🐰 힐링 요정 버니</div>
         </div>
       </aside>
 
-      <!-- 2.3 메인 분석 카드 (Analysis Input Card) -->
+      <!-- 2.3 메인 글래스모피즘 입력 카드 -->
       <section class="analysis-card" aria-label="텍스트 감성 및 식단 분석 입력창">
         
-        <!-- 입력창 상단 라벨 및 원클릭 예시 문장 칩 영역 -->
+        <!-- 라벨 및 감성 예시 칩 모음 -->
         <div class="input-header-row">
-          <label for="text-input" class="input-label">오늘의 일기나 메모를 적어보세요</label>
+          <label for="text-input" class="input-label">
+            <span class="label-dot"></span>
+            오늘의 마음 일기
+          </label>
           
-          <div class="sample-chips-container" aria-label="예시 문장 자동 입력">
+          <div class="sample-chips-container" aria-label="예시 문장 원클릭 입력">
             <span class="sample-chips-title">예시 클릭:</span>
-            <button type="button" class="btn-sample-chip" data-sample="오늘 점심으로 닭가슴살 샐러드와 사과 한 조각을 먹고 가볍게 산책했어요. 몸도 가볍고 정말 뿌듯해요!">
+            <button type="button" class="btn-sample-chip chip-happy" data-sample="오늘 점심으로 닭가슴살 샐러드와 사과 한 조각을 먹고 가볍게 산책했어요. 몸도 가볍고 정말 뿌듯해요!">
               🥗 건강한 하루
             </button>
-            <button type="button" class="btn-sample-chip" data-sample="일이 너무 안 풀리고 우울해서 저녁에 양념치킨 반 마리에 시원한 맥주 500ml를 마셨어요. 마음이 답답하네요.">
+            <button type="button" class="btn-sample-chip chip-sad" data-sample="일이 너무 안 풀리고 우울해서 저녁에 양념치킨 반 마리에 시원한 맥주 500ml를 마셨어요. 마음이 답답하네요.">
               🍗 야식과 속상함
             </button>
-            <button type="button" class="btn-sample-chip" data-sample="아무런 의욕도 안 생기고 온종일 침대에 누워있었어요. 밥도 안 챙겨 먹고 마음이 텅 빈 것처럼 쓸쓸해요.">
+            <button type="button" class="btn-sample-chip chip-gloomy" data-sample="아무런 의욕도 안 생기고 온종일 침대에 누워있었어요. 밥도 안 챙겨 먹고 마음이 텅 빈 것처럼 쓸쓸해요.">
               🌧️ 무기력한 날
             </button>
-            <button type="button" class="btn-sample-chip" data-sample="점심으로 샌드위치를 간단히 먹고 오후에는 다음 주 일정과 서류들을 차분히 정리했습니다.">
+            <button type="button" class="btn-sample-chip chip-calm" data-sample="점심으로 샌드위치를 간단히 먹고 오후에는 다음 주 일정과 서류들을 차분히 정리했습니다.">
               ☁️ 일상 메모
             </button>
           </div>
         </div>
         
-        <!-- 멀티라인 입력창 -->
-        <textarea 
-          id="text-input" 
-          class="analysis-textarea" 
-          placeholder="오늘 어떤 감정을 느끼셨나요? 오늘 드신 음식 이야기(예: 떡볶이, 치킨, 샐러드 등)를 함께 적어주시면 칼로리까지 함께 계산해 드려요..."
-          maxlength="1000"
-        ></textarea>
+        <!-- 감성 텍스트 입력창 -->
+        <div class="textarea-wrapper">
+          <textarea 
+            id="text-input" 
+            class="analysis-textarea" 
+            placeholder="오늘 어떤 감정을 느끼셨나요? 오늘 드신 음식 이야기(예: 떡볶이, 치킨, 샐러드 등)를 함께 적어주시면 칼로리까지 함께 계산해 드려요..."
+            maxlength="1000"
+          ></textarea>
+        </div>
 
-        <!-- 입력창 하단: 글자 수 카운터 및 분석 버튼 -->
+        <!-- 하단: 글자 수 카운터 및 버튼 -->
         <div class="card-footer">
           <div class="char-counter" aria-live="polite">
             <span id="current-length" class="count-current">0</span> / 1,000자
           </div>
 
           <button type="button" id="analyze-btn" class="btn-analyze">
+            <span class="btn-shine"></span>
             <span id="btn-text">감정 & 칼로리 종합 분석하기</span>
+            <span class="btn-arrow">✨</span>
           </button>
         </div>
       </section>
 
     </div>
 
-    <!-- 2.4 오류 메시지 영역 (Error Alert Box) -->
+    <!-- 2.4 오류 메시지 알림 박스 -->
     <div id="error-box" class="error-box hidden" role="alert" aria-live="assertive">
-      <svg class="error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="12" cy="12" r="10"></circle>
-        <line x1="12" y1="8" x2="12" y2="12"></line>
-        <line x1="12" y1="16" x2="12.01" y2="16"></line>
-      </svg>
+      <div class="error-icon-box">
+        <svg class="error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
       <span id="error-message">오류 안내 문구</span>
     </div>
 
-    <!-- 2.5 종합 분석 결과 카드 (Result Card) -->
+    <!-- 2.5 종합 분석 결과 카드 (글래스모피즘 & 감성 테마) -->
     <section id="result-card" class="result-card hidden" aria-labelledby="result-heading" aria-live="polite">
       
-      <!-- 헤더 -->
+      <!-- 카드 상단 헤더 -->
       <div class="result-header">
-        <h2 id="result-heading" class="result-title">AI 마음 & 웰니스 종합 분석</h2>
+        <div class="result-title-group">
+          <span class="result-icon-badge">📊</span>
+          <h2 id="result-heading" class="result-title">마음 & 웰니스 정밀 리포트</h2>
+        </div>
         <div id="sentiment-badge" class="sentiment-badge badge-neutral">
           <span id="badge-icon">⚪</span>
           <span id="badge-text">중립</span>
         </div>
       </div>
 
-      <!-- 1) 신뢰도 프로그레스 바 영역 -->
-      <div class="confidence-section">
-        <div class="confidence-header">
-          <span>AI 감정 확신도</span>
-          <span id="confidence-text" class="confidence-percentage">0%</span>
+      <!-- 1) 감정 확신도 게이지 -->
+      <div class="dashboard-widget confidence-widget">
+        <div class="widget-header">
+          <span class="widget-label">AI 감정 확신도</span>
+          <span id="confidence-text" class="widget-value highlight-blue">0%</span>
         </div>
         <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
           <div id="progress-fill" class="progress-fill"></div>
         </div>
       </div>
 
-      <!-- 2) 스트레스 지수 게이지 섹션 -->
-      <div class="stress-section">
-        <div class="stress-header">
-          <div class="stress-title-wrap">
-            <span class="stress-icon">🧘</span>
-            <span class="stress-title">나의 스트레스 지수</span>
-            <span id="stress-badge" class="stress-badge stress-low">안정</span>
+      <!-- 2개 나란히 배치되는 듀얼 미터기 (스트레스 & 우울감) -->
+      <div class="dual-meter-grid">
+        
+        <!-- 2) 스트레스 지수 -->
+        <div class="dashboard-widget stress-widget">
+          <div class="widget-header">
+            <div class="widget-title-wrap">
+              <span class="widget-emoji">🧘</span>
+              <span class="widget-label">스트레스 지수</span>
+              <span id="stress-badge" class="meter-badge stress-low">안정</span>
+            </div>
+            <span id="stress-level-text" class="widget-value highlight-stress">0점</span>
           </div>
-          <span id="stress-level-text" class="stress-percentage">0점</span>
+          <div class="mini-track">
+            <div id="stress-fill" class="mini-fill"></div>
+          </div>
+          <p id="stress-message" class="widget-desc">스트레스 케어 조언이 여기에 표시됩니다.</p>
         </div>
-        <div class="stress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-          <div id="stress-fill" class="stress-fill"></div>
+
+        <!-- 3) 우울감 지수 -->
+        <div class="dashboard-widget depression-widget">
+          <div class="widget-header">
+            <div class="widget-title-wrap">
+              <span class="widget-emoji">🌧️</span>
+              <span class="widget-label">우울감 지수</span>
+              <span id="depression-badge" class="meter-badge depression-clear">맑음</span>
+            </div>
+            <span id="depression-level-text" class="widget-value highlight-depression">0점</span>
+          </div>
+          <div class="mini-track">
+            <div id="depression-fill" class="mini-fill"></div>
+          </div>
+          <p id="depression-message" class="widget-desc">마음 위로 멘트가 여기에 표시됩니다.</p>
         </div>
-        <p id="stress-message" class="stress-message">
-          스트레스 케어 조언이 여기에 표시됩니다.
-        </p>
+
       </div>
 
-      <!-- 3) 우울감 지수 게이지 섹션 -->
-      <div class="depression-section">
-        <div class="depression-header">
-          <div class="depression-title-wrap">
-            <span class="depression-icon">🌧️</span>
-            <span class="depression-title">마음 우울감 지수</span>
-            <span id="depression-badge" class="depression-badge depression-clear">맑음</span>
-          </div>
-          <span id="depression-level-text" class="depression-percentage">0점</span>
-        </div>
-        <div class="depression-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-          <div id="depression-fill" class="depression-fill"></div>
-        </div>
-        <p id="depression-message" class="depression-message">
-          마음 위로 멘트가 여기에 표시됩니다.
-        </p>
-      </div>
-
-      <!-- 4) 식단 & 칼로리 분석 섹션 -->
-      <div class="calories-section">
-        <div class="calories-header">
-          <div class="calories-title-wrap">
-            <span class="calories-icon">🍽️</span>
-            <span class="calories-title">식단 & 예상 섭취 칼로리</span>
+      <!-- 4) 식단 & 섭취 칼로리 분석 -->
+      <div class="dashboard-widget calories-widget">
+        <div class="widget-header">
+          <div class="widget-title-wrap">
+            <span class="widget-emoji">🍽️</span>
+            <span class="widget-label font-bold">식단 & 예상 섭취 칼로리</span>
           </div>
           <span id="calories-badge" class="calories-badge">🔥 약 0 kcal</span>
         </div>
         
-        <div class="food-detected-box">
-          <span class="food-label">식별된 음식:</span>
-          <span id="food-detected-text" class="food-text">언급된 음식 없음</span>
+        <div class="food-detected-pill">
+          <span class="pill-title">식별된 음식:</span>
+          <span id="food-detected-text" class="pill-content">언급된 음식 없음</span>
         </div>
 
         <p id="nutrition-tip-text" class="nutrition-tip-text">
@@ -221,28 +294,27 @@
         </p>
       </div>
 
-      <!-- 5) [신규 기능] AI 오늘의 힐링 처방전 (실천 체크리스트) -->
-      <div class="healing-section" id="healing-section">
-        <div class="healing-header">
+      <!-- 5) AI 오늘의 힐링 처방전 (스티커 다이어리 체크리스트) -->
+      <div class="dashboard-widget healing-widget" id="healing-section">
+        <div class="healing-top-row">
           <div class="healing-title-wrap">
-            <span class="healing-icon">💊</span>
-            <h3 class="healing-title">AI 오늘의 힐링 처방전</h3>
+            <span class="healing-sparkle">💊</span>
+            <h3 class="healing-title">버니의 오늘의 힐링 처방전</h3>
           </div>
-          <span class="healing-subtext">오늘 하루 나를 위해 실천해 보세요!</span>
+          <span class="healing-subtitle">오늘 나를 위해 하나씩 실천해 봐요!</span>
         </div>
         
-        <!-- 실천 체크리스트 동적 생성 컨테이너 -->
         <ul class="healing-checklist" id="healing-checklist" aria-label="힐링 실천 체크리스트">
-          <!-- JS에서 동적으로 li 항목들이 채워집니다 -->
+          <!-- JS에서 동적으로 채워집니다 -->
         </ul>
       </div>
 
-      <!-- 6) 종합 분석 이유 텍스트 영역 -->
+      <!-- 6) 종합 분석 이유 -->
       <div class="reason-section">
         <h3 class="reason-label">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
             <line x1="12" y1="8" x2="12.01" y2="8"></line>
           </svg>
           종합 분석 이유

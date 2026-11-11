@@ -1,11 +1,11 @@
 /**
  * ==============================================================================
- * MoodLens (AI 감성, 마음건강 & 토끼의 힐링 케어) - 프론트엔드 비즈니스 로직
+ * MoodLens (AI 감성, 마음건강 & 토끼 버니의 힐링 케어) - 프론트엔드 비즈니스 로직
  * 파일명: public/app.js
  * 기술 스택: Vanilla JavaScript (순수 자바스크립트)
  * 설명: 사용자의 입력을 검증하고, 백엔드 API(/api/analyze)를 호출하여
  *       감성, 스트레스, 우울감, 칼로리 분석 및 AI 힐링 처방전을 시각화하고,
- *       귀여운 토끼 마스코트 '버니'와 인터랙티브하게 상호작용합니다.
+ *       사랑스러운 토끼 마스코트 '버니'와 인터랙티브하게 상호작용합니다.
  * ==============================================================================
  */
 
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const foodDetectedText = document.getElementById('food-detected-text');
   const nutritionTipText = document.getElementById('nutrition-tip-text');
 
-  // 5) [신규] AI 오늘의 힐링 처방전 체크리스트 요소
+  // 5) AI 오늘의 힐링 처방전 체크리스트 요소
   const healingChecklist = document.getElementById('healing-checklist');
 
   // 6) 종합 분석 이유
@@ -75,23 +75,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --------------------------------------------------------------------------
-  // 3. 토끼 마스코트 '버니' 인터랙션 (클릭 시 깡총 뛰기 & 애교 멘트)
+  // 3. 토끼 마스코트 '버니' 인터랙션 (클릭 시 깡총 점프 & 애교 멘트)
   // --------------------------------------------------------------------------
   const bunnyPlayfulLines = [
     "토끼를 콕 찔렀네요! 깡총깡총~ 🐰🥕",
-    "오늘 힘든 일이 있었다면 내가 다 들어줄게!",
+    "오늘 힘들었던 일 다 털어놔요, 내가 꼭 안아줄게요!",
     "너는 오늘도 정말 빛나고 소중한 사람이야 ✨",
     "토끼가 옆에서 힘찬 응원 보낼게요, 얍! 💖",
-    "당근 하나 먹고 기운 내볼까요? 🥕🐰"
+    "달콤한 당근 하나 먹고 힘내볼까요? 🥕🐰",
+    "기분 좋은 생각 한 조각, 버니가 선물할게요 🌸"
   ];
 
   bunnyAvatar.addEventListener('click', () => {
-    // 깡총 점프 애니메이션 적용
     bunnyAvatar.classList.remove('bunny-jump');
-    void bunnyAvatar.offsetWidth; // 리플로우 강제 트리거
+    void bunnyAvatar.offsetWidth;
     bunnyAvatar.classList.add('bunny-jump');
 
-    // 랜덤 애교 멘트 출력
     const randomLine = bunnyPlayfulLines[Math.floor(Math.random() * bunnyPlayfulLines.length)];
     bunnyBubbleText.textContent = randomLine;
   });
@@ -109,8 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
         hideResult();
         textInput.focus();
 
-        // 토끼 반응
-        bunnyBubbleText.textContent = "예시 문장을 불러왔어요! 아래 분석 버튼을 눌러보세요 🐰✨";
+        bunnyBubbleText.textContent = "예시 일기를 불러왔어요! 아래 분석 버튼을 눌러보세요 🐰✨";
+        bunnyAvatar.classList.remove('bunny-jump');
+        void bunnyAvatar.offsetWidth;
+        bunnyAvatar.classList.add('bunny-jump');
       }
     });
   });
@@ -132,8 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hideError();
     hideResult();
 
-    // 분석 중 토끼 반응
-    bunnyBubbleText.textContent = "열심히 마음을 읽는 중이에요... 잠시만 기다려줘 🐰💭";
+    bunnyBubbleText.textContent = "버니가 열심히 당신의 마음을 읽고 있어요... 잠시만 기다려줘 🐰💭";
 
     try {
       const response = await fetch('/api/analyze', {
@@ -228,8 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const safeStress = Math.min(100, Math.max(0, Number(stress_level) || 0));
     stressLevelText.textContent = `${safeStress}점`;
 
-    stressBadge.className = 'stress-badge';
-    stressFill.className = 'stress-fill';
+    stressBadge.className = 'meter-badge';
+    stressFill.className = 'mini-fill';
 
     if (safeStress <= 20) {
       stressBadge.classList.add('stress-peace');
@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const safeDepression = Math.min(100, Math.max(0, Number(depression_level) || 0));
     depressionLevelText.textContent = `${safeDepression}점`;
 
-    depressionBadge.className = 'depression-badge';
+    depressionBadge.className = 'meter-badge';
 
     if (safeDepression <= 20) {
       depressionBadge.classList.add('depression-clear');
@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
     nutritionTipText.textContent = nutrition_tip || '건강하고 맛있는 식사로 활력을 채워보세요!';
 
     // ------------------------------------------------------------------------
-    // 6.6 [신규] AI 오늘의 힐링 처방전 (실천 체크리스트 동적 생성)
+    // 6.6 AI 오늘의 힐링 처방전 (실천 체크리스트 동적 생성)
     // ------------------------------------------------------------------------
     healingChecklist.innerHTML = '';
     const actions = Array.isArray(healing_actions) && healing_actions.length > 0
@@ -328,11 +328,9 @@ document.addEventListener('DOMContentLoaded', () => {
       label.htmlFor = `healing-check-${index}`;
       label.textContent = actionText;
 
-      // 클릭 시 완료 줄(취소선) 토글 이벤트
       const toggleComplete = () => {
         if (checkbox.checked) {
           li.classList.add('completed');
-          // 토끼가 칭찬해 주는 귀여운 반응
           bunnyBubbleText.textContent = "와! 힐링 액션을 실천하셨네요! 최고예요 토끼가 칭찬해요 🐰🎉";
           bunnyAvatar.classList.remove('bunny-jump');
           void bunnyAvatar.offsetWidth;
