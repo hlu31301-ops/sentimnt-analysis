@@ -1,0 +1,15 @@
+# 의존성 패키지 폴더
+node_modules/
+
+# 환경 변수 및 비밀 키 파일 (절대 깃허브에 커밋되지 않도록 제외)
+.env
+.env.local
+
+# 로그 및 디버그 파일
+*.log
+npm-debug.log*
+
+# OS 관련 임시 파일
+.DS_Store
+Thumbs.db
+

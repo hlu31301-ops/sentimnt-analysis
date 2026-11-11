@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoodLens - AI 감성, 마음건강 & 칼로리 웰니스 케어</title>
+  <!-- SEO 및 메타 정보 -->
+  <meta name="description" content="사용자가 입력한 글의 감성을 AI가 심층 분석하여 긍정/부정/중립, 스트레스, 우울감 지수 및 섭취 칼로리까지 스마트하게 분석해주는 통합 웰니스 웹 서비스">
+  
+  <!-- CSS 스타일시트 연결 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ======================================================================
+       1. 상단 헤더 영역 (Header)
+       ====================================================================== -->
+  <header class="site-header">
+    <a href="/" class="brand-logo" aria-label="MoodLens 홈으로 이동">
+      <!-- 감성 렌즈를 상징하는 심플한 SVG 아이콘 -->
+      <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
+        <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <line x1="9" y1="9" x2="9.01" y2="9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        <line x1="15" y1="9" x2="15.01" y2="9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span>MoodLens</span>
+    </a>
+  </header>
+
+  <!-- ======================================================================
+       2. 메인 콘텐츠 컨테이너 (Main Container)
+       ====================================================================== -->
+  <main class="main-container">
+    
+    <!-- 2.1 히어로 섹션 (Hero Section) -->
+    <section class="hero-section" aria-labelledby="hero-title">
+      <p class="hero-subtitle">AI Mind & Wellness Care</p>
+      <h1 id="hero-title" class="hero-title">생각에 형태를,<br>감정과 일상에 색을.</h1>
+      <p class="hero-description">
+        오늘 하루 남긴 일기와 메모 속 숨은 감정, 스트레스, 우울감, 그리고 먹은 음식의 칼로리까지 똑똑하게 읽어드립니다.
+      </p>
+    </section>
+
+    <!-- 2.2 메인 분석 카드 (Analysis Input Card) -->
+    <section class="analysis-card" aria-label="텍스트 감성 및 식단 분석 입력창">
+      
+      <!-- 입력창 상단 라벨 및 원클릭 예시 문장 칩 영역 -->
+      <div class="input-header-row">
+        <label for="text-input" class="input-label">오늘의 일기나 메모를 적어보세요</label>
+        
+        <!-- 원클릭 샘플 문장 칩 버튼 모음 -->
+        <div class="sample-chips-container" aria-label="예시 문장 자동 입력">
+          <span class="sample-chips-title">예시 클릭:</span>
+          <button type="button" class="btn-sample-chip" data-sample="오늘 점심으로 닭가슴살 샐러드와 사과 한 조각을 먹고 가볍게 산책했어요. 몸도 가볍고 정말 뿌듯해요!">
+            🥗 건강한 하루
+          </button>
+          <button type="button" class="btn-sample-chip" data-sample="일이 너무 안 풀리고 우울해서 저녁에 양념치킨 반 마리에 시원한 맥주 500ml를 마셨어요. 마음이 답답하네요.">
+            🍗 야식과 속상함
+          </button>
+          <button type="button" class="btn-sample-chip" data-sample="아무런 의욕도 안 생기고 온종일 침대에 누워있었어요. 밥도 안 챙겨 먹고 마음이 텅 빈 것처럼 쓸쓸해요.">
+            🌧️ 무기력한 날
+          </button>
+          <button type="button" class="btn-sample-chip" data-sample="점심으로 샌드위치를 간단히 먹고 오후에는 다음 주 일정과 서류들을 차분히 정리했습니다.">
+            ☁️ 일상 메모
+          </button>
+        </div>
+      </div>
+      
+      <!-- 사용자가 글을 작성하는 멀티라인 입력창 -->
+      <textarea 
+        id="text-input" 
+        class="analysis-textarea" 
+        placeholder="오늘 어떤 감정을 느끼셨나요? 오늘 드신 음식 이야기(예: 떡볶이, 치킨, 샐러드 등)를 함께 적어주시면 칼로리까지 함께 계산해 드려요..."
+        maxlength="1000"
+      ></textarea>
+
+      <!-- 입력창 하단: 글자 수 카운터 및 분석 버튼 -->
+      <div class="card-footer">
+        <div class="char-counter" aria-live="polite">
+          <span id="current-length" class="count-current">0</span> / 1,000자
+        </div>
+
+        <button type="button" id="analyze-btn" class="btn-analyze">
+          <span id="btn-text">감정 & 칼로리 종합 분석하기</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 2.3 오류 메시지 영역 (Error Alert Box) - 기본 숨김 -->
+    <div id="error-box" class="error-box hidden" role="alert" aria-live="assertive">
+      <svg class="error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <span id="error-message">오류 안내 문구</span>
+    </div>
+
+    <!-- 2.4 분석 결과 카드 (Result Card) - 기본 숨김 -->
+    <section id="result-card" class="result-card hidden" aria-labelledby="result-heading" aria-live="polite">
+      
+      <!-- 결과 카드 상단 헤더: 제목과 감정 뱃지 -->
+      <div class="result-header">
+        <h2 id="result-heading" class="result-title">AI 마음 & 웰니스 분석 결과</h2>
+        <div id="sentiment-badge" class="sentiment-badge badge-neutral">
+          <span id="badge-icon">⚪</span>
+          <span id="badge-text">중립</span>
+        </div>
+      </div>
+
+      <!-- 1) 신뢰도 프로그레스 바 영역 -->
+      <div class="confidence-section">
+        <div class="confidence-header">
+          <span>AI 감정 확신도</span>
+          <span id="confidence-text" class="confidence-percentage">0%</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- 2) 스트레스 지수 게이지 섹션 -->
+      <div class="stress-section">
+        <div class="stress-header">
+          <div class="stress-title-wrap">
+            <span class="stress-icon">🧘</span>
+            <span class="stress-title">나의 스트레스 지수</span>
+            <span id="stress-badge" class="stress-badge stress-low">안정</span>
+          </div>
+          <span id="stress-level-text" class="stress-percentage">0점</span>
+        </div>
+        <div class="stress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div id="stress-fill" class="stress-fill"></div>
+        </div>
+        <p id="stress-message" class="stress-message">
+          스트레스 케어 조언이 여기에 표시됩니다.
+        </p>
+      </div>
+
+      <!-- 3) [신규 기능] 우울감 지수 게이지 섹션 -->
+      <div class="depression-section">
+        <div class="depression-header">
+          <div class="depression-title-wrap">
+            <span class="depression-icon">🌧️</span>
+            <span class="depression-title">마음 우울감 지수</span>
+            <span id="depression-badge" class="depression-badge depression-clear">맑음</span>
+          </div>
+          <span id="depression-level-text" class="depression-percentage">0점</span>
+        </div>
+        <div class="depression-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div id="depression-fill" class="depression-fill"></div>
+        </div>
+        <p id="depression-message" class="depression-message">
+          마음 위로 멘트가 여기에 표시됩니다.
+        </p>
+      </div>
+
+      <!-- 4) [신규 기능] 먹은 음식 & 칼로리 분석 섹션 -->
+      <div class="calories-section">
+        <div class="calories-header">
+          <div class="calories-title-wrap">
+            <span class="calories-icon">🍽️</span>
+            <span class="calories-title">식단 & 예상 섭취 칼로리</span>
+          </div>
+          <span id="calories-badge" class="calories-badge">🔥 약 0 kcal</span>
+        </div>
+        
+        <!-- 식별된 음식 목록 박스 -->
+        <div class="food-detected-box">
+          <span class="food-label">식별된 음식:</span>
+          <span id="food-detected-text" class="food-text">언급된 음식 없음</span>
+        </div>
+
+        <!-- 영양 코멘트 팁 -->
+        <p id="nutrition-tip-text" class="nutrition-tip-text">
+          식사나 간식 이야기를 함께 적어주시면 영양과 칼로리를 분석해 드려요!
+        </p>
+      </div>
+
+      <!-- 5) 감성 분석 이유 텍스트 영역 -->
+      <div class="reason-section">
+        <h3 class="reason-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          종합 분석 이유
+        </h3>
+        <p id="reason-text" class="reason-text">
+          분석 이유가 여기에 출력됩니다.
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- 프론트엔드 비즈니스 로직 스크립트 연결 -->
+  <script src="app.js"></script>
+</body>
+</html>
